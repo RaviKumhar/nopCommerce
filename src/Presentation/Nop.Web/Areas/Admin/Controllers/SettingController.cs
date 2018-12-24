@@ -1622,6 +1622,13 @@ namespace Nop.Web.Areas.Admin.Controllers
 
                 _settingService.SaveSettingOverridablePerStore(commonSettings, x => x.FaviconAndAppIconsHeadCode, true, storeScope, true);
 
+                //delete old favicon icon if exist
+                var oldFaviconIconPath = _fileProvider.GetAbsolutePath(string.Format(NopCommonDefaults.OldFaviconIconName, _storeContext.ActiveStoreScopeConfiguration));
+                if (_fileProvider.FileExists(oldFaviconIconPath))
+                {
+                    _fileProvider.DeleteFile(oldFaviconIconPath);
+                }
+
                 //activity log
                 _customerActivityService.InsertActivity("UploadIconsArchive", string.Format(_localizationService.GetResource("ActivityLog.UploadNewIconsArchive"), _storeContext.ActiveStoreScopeConfiguration));
                 _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Configuration.FaviconAndAppIcons.Uploaded"));

@@ -117,6 +117,11 @@
         /// </summary>
         public static string FaviconAndAppIconsPath => "icons\\icons_{0}";
 
+        /// <summary>
+        /// Gets a name of the old favicon icon for current store
+        /// </summary>
+        public static string OldFaviconIconName => "favicon-{0}.ico";
+
         #endregion
     }
 }
